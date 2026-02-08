@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Raymart Belen | Virtual Assistant</title>
+  <meta name="description" content="Raymart Belen — Virtual Assistant. Data entry, Canva, email management, research, chat support, and social media assistance." />
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#0f1a31;
+      --text:#e8eefc;
+      --muted:#a8b3d6;
+      --line:#223055;
+      --accent:#7aa2ff;
+      --accent2:#49e3c6;
+      --shadow: 0 18px 60px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(122,162,255,.25), transparent 60%),
+        radial-gradient(900px 500px at 90% 10%, rgba(73,227,198,.18), transparent 60%),
+        radial-gradient(900px 700px at 50% 100%, rgba(122,162,255,.12), transparent 60%),
+        var(--bg);
+      line-height:1.55;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:1100px; margin:0 auto; padding:24px}
+
+    /* Top bar */
+    .top{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(11,18,32,.85), rgba(11,18,32,.35));
+      border-bottom:1px solid rgba(34,48,85,.5);
+    }
+    .top .wrap{display:flex; align-items:center; justify-content:space-between; gap:16px}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:700}
+    .dot{width:10px; height:10px; border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--accent2)); box-shadow:0 0 24px rgba(122,162,255,.45)}
+    .nav{display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end}
+    .nav a{color:var(--muted); font-weight:600; font-size:14px; padding:10px 12px; border-radius:12px}
+    .nav a:hover{color:var(--text); background:rgba(15,26,49,.6); border:1px solid rgba(34,48,85,.6)}
+
+    /* Hero */
+    .hero{padding:56px 0 18px}
+    .grid{display:grid; grid-template-columns: 1.2fr .8fr; gap:18px}
+    @media (max-width: 900px){ .grid{grid-template-columns:1fr} .hero{padding-top:38px} }
+
+    .card{
+      background: linear-gradient(180deg, rgba(15,26,49,.82), rgba(15,26,49,.58));
+      border:1px solid rgba(34,48,85,.75);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .card .inner{padding:22px}
+
+    .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border:1px solid rgba(34,48,85,.9);
+      background: rgba(11,18,32,.45);
+      border-radius:999px;
+      color:var(--muted);
+      font-weight:700;
+      font-size:13px;
+    }
+    .tag .spark{width:8px;height:8px;border-radius:50%;background:var(--accent2)}
+
+    h1{margin:14px 0 10px; font-size:44px; letter-spacing:-.02em; line-height:1.1}
+    @media (max-width: 520px){ h1{font-size:36px} }
+    p{margin:0 0 10px; color:var(--muted)}
+
+    .ctaRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(34,48,85,.9);
+      background: rgba(11,18,32,.35);
+      font-weight:800;
+      font-size:14px;
+      cursor:pointer;
+    }
+    .btn.primary{
+      border:none;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color:#06101f;
+      box-shadow:0 14px 30px rgba(122,162,255,.18);
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btn:active{transform: translateY(0px)}
+
+    .stats{display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-top:16px}
+    @media (max-width: 520px){ .stats{grid-template-columns:1fr} }
+    .stat{padding:14px; border-radius:16px; border:1px solid rgba(34,48,85,.7); background:rgba(11,18,32,.25)}
+    .stat b{display:block; font-size:18px}
+    .stat span{color:var(--muted); font-weight:700; font-size:13px}
+
+    /* Sections */
+    section{padding:16px 0}
+    .sectionTitle{display:flex; align-items:center; justify-content:space-between; gap:10px; margin:0 0 10px}
+    .sectionTitle h2{margin:0; font-size:18px; letter-spacing:-.01em}
+    .pill{color:var(--muted); font-weight:700; font-size:12px; border:1px solid rgba(34,48,85,.7); background:rgba(11,18,32,.3); padding:7px 10px; border-radius:999px}
+
+    .two{display:grid; grid-template-columns: 1fr 1fr; gap:18px}
+    @media (max-width: 900px){ .two{grid-template-columns:1fr} }
+
+    ul{margin:10px 0 0; padding:0 0 0 18px; color:var(--muted)}
+    li{margin:8px 0}
+
+    .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px}
+    .chip{padding:10px 12px; border-radius:999px; border:1px solid rgba(34,48,85,.7); background:rgba(11,18,32,.25); color:var(--muted); font-weight:700; font-size:13px}
+
+    .portfolioGrid{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
+    @media (max-width: 900px){ .portfolioGrid{grid-template-columns:1fr} }
+    .work{
+      padding:16px;
+      border-radius:16px;
+      border:1px solid rgba(34,48,85,.7);
+      background:rgba(11,18,32,.25);
+      min-height:140px;
+    }
+    .work h3{margin:0 0 6px; font-size:15px}
+    .work p{margin:0; font-size:13px}
+    .work .mini{margin-top:10px; display:flex; gap:8px; flex-wrap:wrap}
+    .badge{font-size:12px; font-weight:800; color:var(--muted); border:1px solid rgba(34,48,85,.6); background:rgba(15,26,49,.45); padding:6px 8px; border-radius:999px}
+
+    /* Contact */
+    .contactRow{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:8px}
+    @media (max-width: 900px){ .contactRow{grid-template-columns:1fr} }
+    .field{display:flex; flex-direction:column; gap:6px}
+    label{color:var(--muted); font-weight:800; font-size:12px}
+    input, textarea{
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(34,48,85,.8);
+      background: rgba(11,18,32,.25);
+      color:var(--text);
+      font-weight:600;
+      outline:none;
+    }
+    textarea{min-height:110px; resize:vertical}
+    .note{font-size:12px; color:var(--muted); margin-top:10px}
+
+    footer{padding:26px 0 60px; color:var(--muted); font-size:13px}
+    .sep{height:1px; background:rgba(34,48,85,.6); margin:18px 0}
+
+    /* Print */
+    @media print{
+      .top, .ctaRow .btn.primary, .note{display:none}
+      body{background:#fff; color:#000}
+      .card{box-shadow:none}
+      p, li, .chip, .pill, .badge, label{color:#333}
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <span>Raymart Belen</span>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="grid">
+        <div class="card">
+          <div class="inner">
+            <span class="tag"><span class="spark" aria-hidden="true"></span> Virtual Assistant</span>
+            <h1>Admin Support • Data Entry • Canva • Social Media</h1>
+            <p>
+              I help clients stay organized and productive by handling admin tasks with accuracy and clear communication. I can support data entry, Canva designs, email management, research, chat support, and social media tasks.
+            </p>
+
+            <div class="ctaRow">
+              <a class="btn primary" href="#contact">Work with me</a>
+              <button class="btn" type="button" onclick="window.print()">Download / Print</button>
+              <a class="btn" href="#portfolio">See sample works</a>
+            </div>
+
+            <div class="stats" aria-label="Quick highlights">
+              <div class="stat"><b>Tools</b><span>iPhone 13 • Laptop</span></div>
+              <div class="stat"><b>Strength</b><span>Accuracy • Organization</span></div>
+              <div class="stat"><b>Style</b><span>Clear • On-time</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" id="about">
+          <div class="inner">
+            <div class="sectionTitle">
+              <h2>About me</h2>
+              <span class="pill">Beginner-friendly</span>
+            </div>
+            <p>
+              I’m Raymart Belen, an organized and dependable Virtual Assistant who can support your daily admin tasks. I’m comfortable with data entry, Canva, email management, research, chat support, and social media assistance. I work carefully, follow instructions, and communicate updates consistently.
+            </p>
+            <div class="sep"></div>
+            <div class="sectionTitle"><h2>Top strengths</h2></div>
+            <ul>
+              <li>Attention to detail and clean file organization</li>
+              <li>Fast learner and open to training</li>
+              <li>Respectful communication and deadline-focused</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="two">
+      <div class="card">
+        <div class="inner">
+          <div class="sectionTitle">
+            <h2>Services</h2>
+            <span class="pill">What I can do</span>
+          </div>
+          <ul>
+            <li>Data entry and data handling (Google Sheets / Excel)</li>
+            <li>Canva designs (simple posts, thumbnails, basic layouts)</li>
+            <li>Email organization and template replies</li>
+            <li>Online research and list building</li>
+            <li>Chat support (customer inquiries / follow-ups)</li>
+            <li>Social media assistance (posting, captions, basic scheduling)</li>
+            <li>File management (folders, labels, naming systems)</li>
+            <li>Document formatting (Docs/Word, simple reports)</li>
+          </ul>
+          <div class="sep"></div>
+          <div class="sectionTitle"><h2>Tools</h2></div>
+          <div class="chips" aria-label="Tools">
+            <span class="chip">Google Docs</span>
+            <span class="chip">Google Sheets</span>
+            <span class="chip">Google Drive</span>
+            <span class="chip">MS Word</span>
+            <span class="chip">MS Excel</span>
+            <span class="chip">Gmail</span>
+            <span class="chip">Canva</span>
+            <span class="chip">Facebook</span>
+            <span class="chip">Messenger</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="inner">
+          <div class="sectionTitle">
+            <h2>Work approach</h2>
+            <span class="pill">How I work</span>
+          </div>
+          <ul>
+            <li>Clarify instructions early to avoid mistakes</li>
+            <li>Deliver on time with consistent updates</li>
+            <li>Keep files organized and easy to find</li>
+            <li>Maintain confidentiality with client information</li>
+          </ul>
+          <div class="sep"></div>
+          <div class="sectionTitle"><h2>Availability</h2></div>
+          <p><strong>Time Zone:</strong> GMT+8 (Philippines)</p>
+          <p><strong>Working Hours:</strong></p>
+          <ul>
+            <li>Monday – Friday: 6:00 PM – 11:00 PM GMT+8</li>
+            <li>Saturday: 4:00 PM – 12:00 AM GMT+8</li>
+          </ul>
+          <p>I can also respond to urgent messages outside these hours when needed and I am open to schedule adjustments based on the client’s time zone.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio">
+      <div class="card">
+        <div class="inner">
+          <div class="sectionTitle">
+            <h2>Portfolio (sample works)</h2>
+            <span class="pill">Client-ready samples</span>
+          </div>
+          <p>
+            Here are my Airbnb-focused sample works. Click any button to open the sample in a new tab.
+          </p>
+
+          <div class="portfolioGrid" role="list">
+            <div class="work" role="listitem">
+              <h3>Airbnb Writing Sample (Newspaper Feature)</h3>
+              <p>Professional feature article showcasing Airbnb operations knowledge and clear written communication.</p>
+              <div class="mini">
+                <span class="badge">Content Writing</span>
+                <span class="badge">Airbnb Support</span>
+              </div>
+              <div class="ctaRow" style="margin-top:10px">
+                <a class="btn" id="link-writing" href="https://docs.google.com/document/d/1JLuxgfzfZXql85k1g1xzojwItf9qFW8nVn3E_fgKftc/edit?usp=drive_link" target="_blank" rel="noreferrer">View Document</a>
+              </div>
+            </div>
+
+            <div class="work" role="listitem">
+              <h3>Canva Guest Welcome Card Set</h3>
+              <p>Designed an Airbnb-style welcome card layout (welcome info, house rules, and checkout reminder).</p>
+              <div class="mini">
+                <span class="badge">Canva</span>
+                <span class="badge">Design</span>
+              </div>
+              <div class="ctaRow" style="margin-top:10px">
+                <a class="btn" id="link-canva" href="https://drive.google.com/file/d/16QA2AHYqkPWXTsFnpyqrn1SmmrYIkgpv/view?usp=drive_link" target="_blank" rel="noreferrer">View Designs</a>
+              </div>
+            </div>
+
+            <div class="work" role="listitem">
+              <h3>Airbnb Calendar & Task Tracker</h3>
+              <p>Simple tracker to organize check-ins/check-outs, cleaning schedules, and guest notes.</p>
+              <div class="mini">
+                <span class="badge">Google Sheets</span>
+                <span class="badge">Organization</span>
+              </div>
+              <div class="ctaRow" style="margin-top:10px">
+                <a class="btn" id="link-tracker" href="https://docs.google.com/spreadsheets/d/17FVtyBgAnC8nH1D8nS-rUttkwRkTRPyC/edit?usp=drive_link&ouid=115898943324271402604&rtpof=true&sd=true" target="_blank" rel="noreferrer">View Tracker</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="note">
+            Tip: After you upload your samples to Google Drive, set sharing to “Anyone with the link → Viewer”, then paste each share link into the buttons above.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="card">
+        <div class="inner">
+          <div class="sectionTitle">
+            <h2>Contact</h2>
+            <span class="pill">Update details</span>
+          </div>
+          <p>Fill in your contact info below. This form is for display only (no backend yet).</p>
+          <div class="contactRow">
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" value="raymartbelen07@gmail.com" />
+            </div>
+            <div class="field">
+              <label for="olj">OnlineJobs.ph Profile</label>
+              <input id="olj" value="https://v2.onlinejobs.ph/jobseekers/info/4757117" />
+            </div>
+            <div class="field">
+              <label for="upwork">Upwork Profile</label>
+              <input id="upwork" value="https://www.upwork.com/freelancers/~011ef4e115f46f1cb5?mp_source=share" />
+            </div>
+            <div class="field" style="grid-column:1/-1">
+              <label for="msg">Short message</label>
+              <textarea id="msg">Hi! I’m interested in helping with your admin tasks. Please share your requirements and timeline.</textarea>
+            </div>
+          </div>
+          <div class="ctaRow" style="margin-top:12px">
+            <a class="btn primary" id="sendEmailBtn" href="mailto:raymartbelen07@gmail.com?subject=Inquiry%20from%20Portfolio&body=Hi%20Raymart,%20I%20found%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20possible%20project.">Send Email</a>
+            <button class="btn" type="button" onclick="copyContact()">Copy contact info</button>
+            <a class="btn" href="#">Back to top</a>
+          </div>
+          <div class="note">Tip: “Send Email” opens your email app with a ready-made message. You can edit the email address and profile links above anytime.</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="sep"></div>
+      <div>© <span id="year"></span> Raymart Belen • Virtual Assistant Portfolio</div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function copyContact(){
+      const email = document.getElementById('email').value.trim();
+      const olj = document.getElementById('olj').value.trim();
+      const upwork = document.getElementById('upwork').value.trim();
+      const text = `Email: ${email}
+OLJ: ${olj}
+Upwork: ${upwork}`;
+      navigator.clipboard?.writeText(text).then(() => {
+        alert('Copied!');
+      }).catch(() => {
+        prompt('Copy this:', text);
+      });
+    }
+  </script>
+</body>
+</html>
